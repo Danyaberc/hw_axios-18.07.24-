@@ -55,6 +55,7 @@ const server = http.createServer(async (req, res) => {
         res.end(String(num))
     }
     else if( url === '/num'){
+        
         res.statusCode = 200;
         res.setHeader('Content-type', 'text/html', 'charset=utf-8');
         console.log(num)

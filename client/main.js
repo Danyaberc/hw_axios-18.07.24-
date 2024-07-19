@@ -1,6 +1,6 @@
 console.log('IT`S WORK')
 
-const render = async() =>{
+const render = async () => {
     const root = document.querySelector('.counter')
 
     const inc = root.querySelector('.inc')
@@ -8,20 +8,32 @@ const render = async() =>{
     const num = root.querySelector('.num')
 
     const { data } = await axios.get('/num')
-    num.innerHTML = data
-    
-    inc.addEventListener('click', () =>{
-         axios.get('/inc')
+
+    axios.get('/num').then((res) => {
+        num.innerHTML = res.data
     })
 
-    dec.addEventListener('click', () =>{
-         axios.get('/dec')
+    inc.addEventListener('click', () => {
+        num.innerHTML = 'loading'
+
+        axios.get('/inc').then((res) => {
+            console.log(res.data)
+            num.innerHTML = res.data
+
+        })
     })
 
-    num.addEventListener('change', async() =>{
-        await axios.get('/num')
-        
+    dec.addEventListener('click', () => {
+        num.innerHTML = 'loading'
+        //then.catch.finally.spinner
+
+        axios.get('/dec').then((res) => {
+            console.log(res.data)
+            num.innerHTML = res.data
+        })
     })
+
+
     console.log(data)
 }
 
